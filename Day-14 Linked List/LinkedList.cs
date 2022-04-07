@@ -15,12 +15,12 @@ namespace Day_14_Linked_List
             if (this.head == null)
             {
                 this.head = newNode; // If head pointing to null then hode is directly pointing to new node
-                Console.WriteLine($"{newNode.data} is inserted at first of linked list");
+                Console.WriteLine($"\n{newNode.data} is inserted at first of linked list");
                 return;
             }
             newNode.next = this.head; // newnode pointing to where head is currently pointing
             this.head = newNode; // head is pointing to new node
-            Console.WriteLine($"{newNode.data} is inserted at first of linked list");
+            Console.WriteLine($"\n{newNode.data} is inserted at first of linked list");
         }
         public void DisplayElement() // creating generic method to display element at first of linked list
         {
@@ -47,7 +47,7 @@ namespace Day_14_Linked_List
             if (this.head == null)
             {
                 this.head = newNode; // If head pointing to null then hode is directly pointing to new node
-                Console.WriteLine($"{newNode.data} is appended in linked list");
+                Console.WriteLine($"\n{newNode.data} is appended in linked list");
                 return;
             }
             else
@@ -58,31 +58,31 @@ namespace Day_14_Linked_List
                     temp = temp.next;// Go to next node till last nast node               
                 }
                 temp.next = newNode; // Add new Node at last
-                Console.WriteLine($"{newNode.data} is appended in linked list");
+                Console.WriteLine($"\n{newNode.data} is appended in linked list");
             }
         }
         public void insertBetween(Node<T> prevNode, T data, Node<T> nextNode) // creating generic method to Add element between two nodes
         {
             if (prevNode == null && nextNode == null) //Check if the given Node is null
             {
-                Console.WriteLine("The given previous node and next node cannot be null");
+                Console.WriteLine("\nThe given previous node and next node cannot be null");
                 return;
             }
             Node<T> newNode = new Node<T>(data); // Allocate the Node & Put in the data          
             newNode.next = nextNode; // Make next of new Node as next of prev_node
             prevNode.next = newNode; //make next of prev_node as new_node
             //this.head = prevNode;
-            Console.WriteLine($"{newNode.data} is inserted between {prevNode.data} and {nextNode.data} in linked list");
+            Console.WriteLine($"\n{newNode.data} is inserted between {prevNode.data} and {nextNode.data} in linked list");
         }
         public void DeleteAtFirst() // creating generic method to delete element at first of linked list
         {
             if (this.head == null) //Checking that list is empty or not
             {
-                Console.WriteLine("Linked List is already Empty");
+                Console.WriteLine("\nLinked List is already Empty");
                 return;
             }
             Node<T> temp = this.head; // Creating a temp node having head reference
-            Console.WriteLine($"\nNow deleting {temp.data} ....");
+            Console.WriteLine($"\nNow deleting first element {temp.data} ....");
             this.head = this.head.next;  // Deleting a first node  
         }
         public void DeleteAtLast() // creating generic method to delete element at last of linked list
@@ -90,19 +90,19 @@ namespace Day_14_Linked_List
             Node<T> temp = this.head; // Creating a temp node having head reference
             if (temp == null) //Checking that list is empty or not
             {
-                Console.WriteLine("Linked List is already Empty");
+                Console.WriteLine("\nLinked List is already Empty");
                 return;
             }
             if (temp.next == null) //Checking that list having only one node
             {
-                Console.WriteLine($"\nNow deleting {temp.data} ....");
+                Console.WriteLine($"\nNow deleting last element {temp.data} ....");
                 return;
             }
             while (temp.next.next != null) // Checking that list having atleast 2 nodes
             {
                 temp = temp.next; // Go to next node
             }
-            Console.WriteLine($"\nNow deleting {temp.next.data} ....");
+            Console.WriteLine($"\nNow deleting last element {temp.next.data} ....");
             temp.next = null; // Deleting a last node       
         }
         public void Search(T data)
@@ -150,6 +150,7 @@ namespace Day_14_Linked_List
         {
             Node<T> temp = this.head; // Creating a temp node having head reference
             Node<T> prev = null; // Declaring variable to store the prev node 
+            Console.WriteLine("\nWant to delete element is : " + newElement);
             if (temp == null) //Checking that list is empty or not
             {
                 Console.WriteLine("\nLinked List is Empty");
@@ -169,5 +170,44 @@ namespace Day_14_Linked_List
             prev.next = temp.next; // Deleting node which want to delete
             Console.WriteLine($"\n{newElement} is deleted");
         }
+
+        public void AddWithAcsendingOrder(T data) // Creating a method to add element by ascending order
+        {
+            Node<T> newNode = new Node<T>(data); //Creating a new node with value by user
+            //If Head is null make newnode as head otherwise add the element 
+            if (this.head == null)
+            {
+                this.head = newNode;
+            }
+            else
+            {
+                //If newnode is less than the head data then make new node ad head which is pointing to old head
+                if (newNode.data.CompareTo(this.head.data) < 0)
+                {
+                    newNode.next = this.head;
+                    this.head = newNode;
+                }
+                else
+                {
+                    Node<T> temp = this.head; // Creating a temp varible and store head it in
+                    while (temp.next != null && temp.next.data.CompareTo(data) < 0) //If new data is greater than all then move temp at last
+                    {
+                        temp = temp.next;
+                    }
+                    if (temp.next != null) // If temp is pointing to any node then make add new node after temp
+                    {
+                        newNode.next = temp.next;
+                        temp.next = newNode;
+                    }
+                    else // If temp is pointing to null then make add new node at last
+                    {
+                        temp.next = newNode;
+                        newNode.next = null;
+                    }
+                }
+            }
+            Console.WriteLine($"\n{data} is Added in Linked List");
+        }
+
     }
 }
