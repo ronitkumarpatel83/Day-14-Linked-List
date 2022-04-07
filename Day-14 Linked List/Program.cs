@@ -16,8 +16,8 @@ namespace Day_14_Linked_List
             list.Append(30); // Calling method of CustomLinkedList generic class to append 70
             list.Append(70); // Calling method of CustomLinkedList generic class to append 30 
             list.DisplayElement(); // Calling method of CustomLinkedList generic class to display linkedlist element
-            list.DeleteAtLast(); // Calling method of CustomLinkedList generic class to delete first element of linkedlist element
-            list.DisplayElement(); // Calling method of CustomLinkedList generic class to display linkedlist element
+            list.Search(30); // Calling method of CustomLinkedList generic class to search element in linkedlist
+            list.Search(40); // Calling method of CustomLinkedList generic class to search element in linkedlist
             Console.ReadLine();
         }
     }
